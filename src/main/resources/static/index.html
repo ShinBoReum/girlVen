@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "/valueTest",
+            success: (data) => {
+            console.log(data);
+            $('#contents').html(data);
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/testValue",
+            success: (data) => {
+            console.log(data);
+            $('#contents2').html(data);
+            }
+        });
+
+        function dartReq() {
+            var corpCode = document.getElementById("corpCode").value;//"00126380";
+            var bsnsYear = document.getElementById("bsnsYear").value;//"2018";
+            var reprtCode = document.getElementById("reprtCode").value;//"11011";
+
+            console.log(corpCode);
+            console.log(bsnsYear);
+            console.log(reprtCode);
+
+
+            $.ajax({
+                type: "GET",
+                url: "/openDartAPI",
+                data : {
+                    corpCode : corpCode,
+                    bsnsYear : bsnsYear,
+                    reprtCode : reprtCode
+                },
+                success: (data) => {
+                console.log(data);
+                $('#dartResult').html(data);
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Hello  World!</h1>
+    <div id="contents"></div>
+    <div id="contents2"></div>
+    <div id="btn1" onclick="dartReq()">
+        <input id="corpCode" value="00126380"/>
+        <input id="bsnsYear" value="2018"/>
+        <input id="reprtCode" value="11011"/>
+        <button>요청</button>
+    </div>
+    <div id="dartResult"></div>
+</body>
+</html>
